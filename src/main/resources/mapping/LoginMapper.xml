@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.SophieFU.mapper.LoginMapper">
+
+    <resultMap id="LoginPo" type="com.SophieFU.domain.po.LoginPo">
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="logintype" property="loginType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="fieldSql">
+        t.user_id
+        ,t.user_name
+        ,t.phone
+        ,t.password
+        ,t.logintype
+    </sql>
+
+    <sql id="whereSql">
+        <if test="c != null and userId != ''">
+            AND t.user_id = #{userId,jdbcType = VARCHAR}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND t.user_name = #{userName,jdbcType = VARCHAR}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND t.phone = #{phone,jdbcType = VARCHAR}
+        </if>
+        <if test="password != null and password != ''">
+            AND t.password = #{password,jdbcType = VARCHAR}
+        </if>
+        <if test="loginType != null and loginType != ''">
+            AND t.logintype = #{loginType,jdbcType = INTEGER}
+        </if>
+    </sql>
+
+    <select id="queryUserId" resultType="String">
+        SELECT concat('YH', date_format(now(), '%y%m%d'),LPAD(nextval('user_seq'),8,0)) from dual
+    </select>
+
+    <insert id="addLogin" parameterType="com.SophieFU.domain.po.LoginPo">
+        INSERT INTO test_login(
+        <if test="userId != null">
+            user_id
+        </if>
+        ,user_name
+        <if test="phone != null">
+            ,phone
+        </if>
+        <if test="password != null">
+            ,password
+        </if>
+        ,logintype
+        )
+        VALUES (
+        <if test="userId != null">
+            #{userId,jdbcType = VARCHAR}
+        </if>
+        ,#{userName,jdbcType = VARCHAR}
+        <if test="phone != null">
+            ,#{phone,jdbcType = VARCHAR}
+        </if>
+        <if test="password != null">
+            ,#{password,jdbcType = VARCHAR}
+        </if>
+        ,#{loginType,jdbcType = INTEGER}
+        )
+    </insert>
+</mapper>
