@@ -29,9 +29,14 @@ public class LoginController extends BaseController{
         if(!form.getPassword().equals(form.getConfirmPassword())){
             return getFailResult("两次密码不一致！");
         }
+        int count = loginservice.queryPhone(form.getPhone());
+        if(count >= 1){
+            return getFailResult("该手机号码已被注册！");
+        }
         LoginPo loginpo = CopyUtil.transfer(form,LoginPo.class);
         String userId = loginservice.getUserId();
         loginpo.setUserId(userId);
+        loginpo.setLoginType(1);
         loginservice.addLogin(loginpo);
         return getSuccessResult();
     }

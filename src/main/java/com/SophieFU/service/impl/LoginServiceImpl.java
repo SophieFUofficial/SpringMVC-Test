@@ -20,4 +20,9 @@ public class LoginServiceImpl implements LoginService {
     public void addLogin(LoginPo loginpo){
         loginMapper.addLogin(loginpo);
     }
+
+    @Override
+    public int queryPhone(String phone){
+        return loginMapper.queryPhone(phone);
+    }
 }

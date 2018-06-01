@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-@ApiModel(description = "登录信息")
+@ApiModel(description = "注册信息")
 public class LoginCreateForm {
 
     @ApiModelProperty(value = "用户昵称")
@@ -29,5 +29,5 @@ public class LoginCreateForm {
     private String phone;
 
     @ApiModelProperty(value = "登录类型")
-    private String loginType;
+    private Integer loginType;
 }

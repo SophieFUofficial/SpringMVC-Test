@@ -68,4 +68,11 @@
         ,#{loginType,jdbcType = INTEGER}
         )
     </insert>
+
+    <select id="queryPhone" parameterType="String" resultType="Integer">
+        SELECT
+			count(1)
+		  FROM test_login
+		 WHERE phone = #{phone,jdbcType = VARCHAR}
+    </select>
 </mapper>

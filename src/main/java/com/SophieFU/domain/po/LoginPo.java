@@ -28,5 +28,5 @@ public class LoginPo {
     /**
      * 登录类型：0.管理员1.普通用户
      */
-    private String loginType;
+    private Integer loginType;
 }

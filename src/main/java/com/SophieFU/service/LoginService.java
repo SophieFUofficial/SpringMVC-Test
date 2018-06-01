@@ -14,4 +14,11 @@ public interface LoginService {
      * @param loginpo
      */
     void addLogin(LoginPo loginpo);
+
+    /**
+     * 查询注册手机号是否重复
+     * @param phone
+     * @return
+     */
+    int queryPhone(String phone);
 }
